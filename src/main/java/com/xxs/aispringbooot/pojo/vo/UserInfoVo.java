@@ -1,6 +1,16 @@
 package com.xxs.aispringbooot.pojo.vo;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserInfoVo {
     private Long id;
     private String username;
@@ -10,12 +20,12 @@ public class UserInfoVo {
     private String phone;
     private Integer gender;
     private String genderDisplayName;
-    private String birthday;
+    private LocalDate birthday;
     private Integer userType;
     private String userTypeDisplayName;
     private Integer status;
     private String statusDisplayName;
     private String displayName;
-    private String createdAt;
-    private String updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

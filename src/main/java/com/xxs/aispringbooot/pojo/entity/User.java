@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.xxs.aispringbooot.common.enums.UserStatus;
+import com.xxs.aispringbooot.common.enums.UserType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -64,9 +65,9 @@ public class User {
     @TableField("updated_at")
     private LocalDateTime updatedAt;
 
-//    public boolean isUser() {
-//        return UserType.USER.getCode().equals(this.userType);
-//    }
+    public boolean isUser() {
+        return UserType.USER.getCode().equals(this.userType);
+    }
 
     public boolean isActive() {
         return UserStatus.NORMAL.getCode().equals(this.status);
@@ -80,13 +81,13 @@ public class User {
         return nickname != null && !nickname.trim().isEmpty() ? nickname : username;
     }
 
-//    public String getUserTypeDisplayName() {
-//        try {
-//            return UserType.fromCode(userType).getDescription();
-//        } catch (IllegalArgumentException e) {
-//            return "未知";
-//        }
-//    }
+    public String getUserTypeDisplayName() {
+        try {
+            return UserType.fromCode(userType).getDescription();
+        } catch (IllegalArgumentException e) {
+            return "未知";
+        }
+    }
 
     public String getStatusDisplayName() {
         try {

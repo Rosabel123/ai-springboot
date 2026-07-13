@@ -8,5 +8,5 @@ import com.xxs.aispringbooot.pojo.vo.UserLoginVo;
 import jakarta.validation.Valid;
 
 public interface UserService extends IService<User> {
-    Result<UserLoginVo> login(@Valid UserLoginDTO userLoginDTO);
+    UserLoginVo login(@Valid UserLoginDTO userLoginDTO);
 }
