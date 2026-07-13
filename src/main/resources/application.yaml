@@ -3,6 +3,8 @@ spring:
     url: jdbc:mysql://localhost:3306/ai-springboot?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: root
     password: 123456
+  main:
+    allow-bean-definition-overriding: true
 #服务器配置
 server:
   port: 8090
@@ -10,3 +12,16 @@ server:
 logging:
   level:
     root: INFO
+#JWT配置
+jwt:
+  secret: xiaoxiao
+  # 过期时间
+  expiration: 86400000
+  # 刷新令牌过期时间
+  refreshTokenExpiration: 604800000
+  # 头信息
+  header: Authorization
+  # 令牌前缀
+  tokenPrefix: Bearer
+  # 签发者
+  issuer: xxs

@@ -1,4 +1,5 @@
 package com.xxs.aispringbooot.common;
+import com.xxs.aispringbooot.common.enums.ResultCode;
 import lombok.Data;
 @Data
 public class Result<T> {

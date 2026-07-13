@@ -1,7 +1,7 @@
 package com.xxs.aispringbooot.common.exception;
 
 import com.xxs.aispringbooot.common.Result;
-import com.xxs.aispringbooot.common.ResultCode;
+import com.xxs.aispringbooot.common.enums.ResultCode;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,6 +19,11 @@ public class GlobalExceptionHandler {
                 .map(FieldError::getDefaultMessage)
                 .collect(Collectors.joining(","));
         return Result.error(ResultCode.PARAM_ERROR.getCode(), ResultCode.PARAM_ERROR.getMsg(), message);
+    }
+    //处理业务异常
+    @ExceptionHandler(BusinessException.class)
+    public Result<?> handleException(BusinessException e) {
+        return Result.error(e.getCode(), e.getMessage(), e.getData());
     }
 }
 

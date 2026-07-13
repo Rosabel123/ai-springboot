@@ -1,4 +1,4 @@
-package com.xxs.aispringbooot.pojo.DTO;
+package com.xxs.aispringbooot.pojo.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;

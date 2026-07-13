@@ -1,4 +1,4 @@
-package com.xxs.aispringbooot.common;
+package com.xxs.aispringbooot.common.enums;
 
 public enum ResultCode {
     SUCCESS("200", "操作成功"),
