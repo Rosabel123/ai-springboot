@@ -2,23 +2,48 @@ package com.xxs.aispringbooot.controller;
 
 import com.xxs.aispringbooot.common.Result;
 import com.xxs.aispringbooot.pojo.dto.UserLoginDTO;
+import com.xxs.aispringbooot.pojo.dto.UserRegisterDTO;
+import com.xxs.aispringbooot.pojo.vo.UserInfoVo;
 import com.xxs.aispringbooot.pojo.vo.UserLoginVo;
 import com.xxs.aispringbooot.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
     @Autowired
     private UserService userService;
+
+    /**
+     * 用户登录接口
+     * @param userLoginDTO
+     * @return
+     */
     @PostMapping("/login")
-    public Result login(@Valid @RequestBody UserLoginDTO userLoginDTO) {
+    public Result<UserLoginVo> login(@Valid @RequestBody UserLoginDTO userLoginDTO) {
         UserLoginVo userLoginVo = userService.login(userLoginDTO);
         return Result.success(userLoginVo);
     }
+    /**
+     * 用户注册接口
+     * @param userRegisterDTO
+     * @return
+     */
+    @PostMapping("/add")
+    public Result<UserInfoVo> register(@Valid @RequestBody UserRegisterDTO userRegisterDTO) {
+        UserInfoVo userInfoVo = userService.register(userRegisterDTO);
+        return Result.success(userInfoVo);
+    }
+    /**
+     * 获取用户信息接口
+     * @return
+     */
+    @GetMapping("/current")
+    public Result<UserInfoVo> getCurrentUser() {
+//        UserInfoVo userInfoVo = userService.getCurrentUserInfo();
+        return Result.success();
+    }
+
 }

@@ -5,10 +5,12 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.xxs.aispringbooot.config.JwtConfig;
 import com.xxs.aispringbooot.controller.UserController;
 import com.xxs.aispringbooot.service.serviceimpl.UserServiceImpl;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.swing.*;
 import java.util.Date;
@@ -38,6 +40,17 @@ public class JwtTokenUtil implements ApplicationContextAware {
         } catch (Exception e) {
             throw new RuntimeException("生成token失败",e);
         }
+    }
+    //提取token的方法
+    public static String extractTokenFromRequest(HttpServletRequest request) {
+        if(request == null ){
+            return null;
+        }
+        String tokenHeader = request.getHeader("token");
+        if(StringUtils.hasText(tokenHeader)){
+            return tokenHeader;
+        }
+        return null;
     }
     //用于在静态工具类中获取Spring容器管理的Bean
     @Override

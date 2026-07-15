@@ -20,7 +20,7 @@ jwt:
   # 刷新令牌过期时间
   refreshTokenExpiration: 604800000
   # 头信息
-  header: Authorization
+  header: token
   # 令牌前缀
   tokenPrefix: Bearer
   # 签发者
