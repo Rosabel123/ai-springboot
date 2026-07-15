@@ -12,4 +12,5 @@ import jakarta.validation.Valid;
 public interface UserService extends IService<User> {
     UserLoginVo login(@Valid UserLoginDTO userLoginDTO);
     UserInfoVo register(@Valid UserRegisterDTO userRegisterDTO);
+    UserInfoVo getUserById(Long userId);
 }

@@ -161,5 +161,28 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 return "未知";
         }
     }
-
+    public UserInfoVo getUserById(Long userId){
+        User user = userMapper.selectById(userId);
+        if (user ==null){
+            throw new BusinessException("用户不存在");
+        }
+        UserInfoVo userInfoVo = UserInfoVo.builder()
+                .id(user.getId())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .nickname(user.getNickname())
+                .phone(user.getPhone())
+                .gender(user.getGender())
+                .genderDisplayName(genderDisplayName(user.getGender()))
+                .birthday(user.getBirthday())
+                .userType(user.getUserType())
+                .userTypeDisplayName(user.getUserTypeDisplayName())
+                .status(user.getStatus())
+                .statusDisplayName(user.getStatusDisplayName())
+                .displayName(user.getDisplayName())
+                .createdAt(user.getCreatedAt())
+                .updatedAt(user.getUpdatedAt())
+                .build();
+        return userInfoVo;
+    }
 }

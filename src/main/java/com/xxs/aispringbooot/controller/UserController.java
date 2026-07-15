@@ -1,6 +1,8 @@
 package com.xxs.aispringbooot.controller;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.xxs.aispringbooot.common.Result;
+import com.xxs.aispringbooot.common.utils.JwtTokenUtil;
 import com.xxs.aispringbooot.pojo.dto.UserLoginDTO;
 import com.xxs.aispringbooot.pojo.dto.UserRegisterDTO;
 import com.xxs.aispringbooot.pojo.vo.UserInfoVo;
@@ -8,6 +10,8 @@ import com.xxs.aispringbooot.pojo.vo.UserLoginVo;
 import com.xxs.aispringbooot.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -42,8 +46,13 @@ public class UserController {
      */
     @GetMapping("/current")
     public Result<UserInfoVo> getCurrentUser() {
-//        UserInfoVo userInfoVo = userService.getCurrentUserInfo();
-        return Result.success();
+        // 如何从token中解析出用户的id
+        String token = JwtTokenUtil.getCurrentToken();
+        DecodedJWT jwt = JwtTokenUtil.verifyToken(token);
+        Long userId = jwt.getClaim("userId").asLong();
+        // 调用service层获取用户详情
+        UserInfoVo userInfoVo = userService.getUserById(userId);
+        return Result.success(userInfoVo);
     }
 
 }
